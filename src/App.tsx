@@ -3,7 +3,6 @@ import SelectDates from "@/components/select-dates/select-dates.tsx";
 import Output from "@/components/output/output.tsx";
 
 function App() {
-
   return (
     <>
       <Header/>
