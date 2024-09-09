@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { format } from "date-fns";
 import { ClipboardCopy, ClipboardList } from "lucide-react";
 import { useToast } from "@/hooks/use-toast.ts";
+import { cn } from "@/lib/utils.ts";
 
 const Output = () => {
   const { finalData, validDates } = useContext(DayFormContext)
@@ -38,7 +39,7 @@ const Output = () => {
   }
 
   const copyAll = async () => {
-    if(validDates){
+    if (validDates) {
       await navigator.clipboard.writeText(validDates?.map(day => format(day, "dd/MM/yyyy")).join(", "))
       toast({
         title: "Wszystkie daty skopiowano do schowka",
@@ -68,7 +69,7 @@ const Output = () => {
     }
     result.push(
       <TableCell
-        className="font-medium text-center border-r-2"
+        className="font-medium text-center"
         onClick={() => copyWeek(week.map(day => format(day, "dd/MM/yyyy")))}
         key={uuidv4()}
       >
@@ -76,6 +77,7 @@ const Output = () => {
           <ClipboardCopy/>
         </Button>
       </TableCell>)
+
     return result
   }
 
@@ -90,7 +92,7 @@ const Output = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {finalData?.map((week, index) => (
+        {finalData?.length && finalData?.map((week, index) => (
             <TableRow key={`row-${index}`}>
               {tableCell(week)}
             </TableRow>
@@ -99,11 +101,10 @@ const Output = () => {
                 <TableCell colSpan={8} className="text-center font-bold">Wybierz zakres i dni tygodnia</TableCell>
             </TableRow>
         }
-
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={8}>
+          <TableCell className={cn(!finalData?.length && "hidden")} colSpan={8}>
             <Button disabled={!finalData} onClick={copyAll}>
               <ClipboardList className="mr-2"/>
               Kopiuj wszystko

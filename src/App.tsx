@@ -25,7 +25,7 @@ function App() {
             </CardContent>
           </Card>
         </div>
-        <div className="p-3 col-span-2">
+        <div className="p-3 col-span-2 overflow-x-auto">
           <Output/>
         </div>
       </div>
