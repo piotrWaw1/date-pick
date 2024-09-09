@@ -8,16 +8,19 @@ import { dayCheckers } from "@/util/days-fo-week.ts";
 
 interface DayFormContext {
   finalData: Date[][] | undefined;
+  validDates: Date[] | undefined
   setData: (data: FormSchema) => void;
 }
 
 export const DayFormContext = createContext<DayFormContext>({
   finalData: undefined,
+  validDates: undefined,
   setData: () => undefined,
 });
 
 const DayFormProvider = ({ children }: { children: ReactNode }) => {
   const [finalData, setFinalData] = useState<Date[][] | undefined>()
+  const [validDates, setValidDates] = useState<Date[] | undefined>();
 
   const setData = (data: FormSchema | undefined) => {
     if (data) {
@@ -35,7 +38,7 @@ const DayFormProvider = ({ children }: { children: ReactNode }) => {
           }
           return false
         })
-
+        setValidDates(dateSearch)
         const sorted = weekSort(dateSearch, countTrue)
         setFinalData(sorted)
       }
@@ -70,6 +73,7 @@ const DayFormProvider = ({ children }: { children: ReactNode }) => {
 
   const contextData = {
     finalData,
+    validDates,
     setData
   }
 
