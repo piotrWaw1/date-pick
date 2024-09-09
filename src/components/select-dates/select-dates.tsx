@@ -34,11 +34,6 @@ const formSchema = z.object({
 
 export type FormSchema = z.infer<typeof formSchema>
 
-export type dateRange = {
-  from?: Date,
-  to?: Date,
-}
-
 const defaultValues = {
   dateRange: {
     from: undefined,

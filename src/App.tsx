@@ -8,8 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { useEffect, useState } from "react";
 
 function App() {
+  const [isLarge, setIsLarge] = useState<boolean>(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLarge(window.innerWidth >= 1280)
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  }, []);
+
   return (
     <>
       <Header/>
@@ -18,7 +30,8 @@ function App() {
           <Card>
             <CardHeader>
               <CardTitle>Wybierz zakres dat</CardTitle>
-              <CardDescription>Wypełnij cały formularz a dane zostaną wyświetlone w tabelce obok.</CardDescription>
+              <CardDescription>Wypełnij cały formularz a dane zostaną wyświetlone w
+                tabelce {isLarge ? "obok" : "pod spodem"}.</CardDescription>
             </CardHeader>
             <CardContent className="flex justify-center">
               <SelectDates/>
