@@ -6,11 +6,11 @@ function App() {
   return (
     <>
       <Header/>
-      <div className="container m-auto grid  md:grid-cols-2 gap-10 mt-5">
+      <div className="container m-auto grid md:grid-cols-3 gap-10 mt-5">
         <div className=" p-3">
           <SelectDates/>
         </div>
-        <div className="bg-amber-500 p-3">
+        <div className="p-3 col-span-2">
           <Output/>
         </div>
       </div>

@@ -4,6 +4,10 @@ import App from './App.tsx'
 import './index.css'
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import DayFormProvider from "@/context/day-form.tsx";
+import { setDefaultOptions } from "date-fns";
+import { pl } from "date-fns/locale";
+
+setDefaultOptions({ locale: pl })
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/popover"
 import { ControllerRenderProps } from "react-hook-form";
 import React from "react";
+import { pl } from "date-fns/locale";
 
 const DateRangeCalendar = React.forwardRef<HTMLButtonElement, ControllerRenderProps>((props, ref) => {
   const { onChange, value } = props
@@ -44,6 +45,7 @@ const DateRangeCalendar = React.forwardRef<HTMLButtonElement, ControllerRenderPr
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
+            locale={{ ...pl, options: { weekStartsOn: 1 } }}
             initialFocus
             mode="range"
             defaultMonth={value?.from}

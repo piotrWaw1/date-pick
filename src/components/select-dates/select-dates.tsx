@@ -15,23 +15,29 @@ import { DayFormContext } from "@/context/day-form.tsx";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { DAYSFORM, DAYSPL } from "@/util/days-fo-week.ts";
 
 const formSchema = z.object({
   dateRange: z.object({
     from: z.date().optional(),
     to: z.date().optional(),
   }),
-  mon: z.boolean().optional(),
-  tue: z.boolean().optional(),
-  wed: z.boolean().optional(),
-  thu: z.boolean().optional(),
-  fri: z.boolean().optional(),
-  sat: z.boolean().optional(),
-  sun: z.boolean().optional(),
+  mon: z.boolean().optional().default(false),
+  tue: z.boolean().optional().default(false),
+  wed: z.boolean().optional().default(false),
+  thu: z.boolean().optional().default(false),
+  fri: z.boolean().optional().default(false),
+  sat: z.boolean().optional().default(false),
+  sun: z.boolean().optional().default(false),
   evenNotEven: z.string().optional().default("even"),
 })
 
 export type FormSchema = z.infer<typeof formSchema>
+
+export type dateRange = {
+  from?: Date,
+  to?: Date,
+}
 
 const defaultValues = {
   dateRange: {
@@ -40,10 +46,6 @@ const defaultValues = {
   },
   evenNotEven: "even",
 }
-
-type DaysFormType = ("mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun")[]
-const DAYSFORM: DaysFormType = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
-const DAYSPL = ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Niedz"]
 
 const SelectDates = () => {
   const { setData } = useContext(DayFormContext)
