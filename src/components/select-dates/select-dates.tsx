@@ -39,6 +39,13 @@ const defaultValues = {
     from: undefined,
     to: undefined,
   },
+  mon: false,
+  tue: false,
+  wed: false,
+  thu: false,
+  fri: false,
+  sat: false,
+  sun: false,
   evenNotEven: "even",
 }
 
@@ -51,10 +58,13 @@ const SelectDates = () => {
   })
 
   const onSubmit = form.handleSubmit((values: FormSchema) => setData(values))
+  const reset = () => {
+    form.reset({ ...defaultValues })
+  }
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} className="space-y-3">
+      <form onSubmit={onSubmit} onReset={reset} className="space-y-3">
         <FormField
           control={form.control}
           name="dateRange"
@@ -117,7 +127,8 @@ const SelectDates = () => {
             ))}
           </div>
         </div>
-        <Button type="submit">Submit</Button>
+        <Button variant="secondary" className="mr-3" type="reset">Reset</Button>
+        <Button type="submit">Generuj</Button>
       </form>
     </Form>
   )
